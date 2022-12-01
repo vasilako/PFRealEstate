@@ -1,0 +1,6 @@
+# Modifiqued by Basilio
+PFRealEstate/core_app/migrations/__pycache__/
+PFRealEstate/owner_app/__pycache__/
+PFRealEstate/owner_app/migrations/__pycache__/
+PFRealEstate/property_app/migrations/__pycache__/
+PFRealEstate/user_agent_app/migrations/__pycache__/

@@ -1,7 +1,14 @@
 from django.db import models
 
+class Images_mod(models.Model):
+    filename = models.ImageField(
+        upload_to=None,
+        width_field=300,
 
-class Property(models.Model):
+    )
+
+
+class Property_mod(models.Model):
     PROPERTY_TYPES = [
         ('flat', 'Flat'),
         ('area', 'Area'),
@@ -47,8 +54,22 @@ class Property(models.Model):
         blank=False,
     )
 
-    # Todo , continuar con los campos locatiion, city, image, owner name, owner phone
+    owner = models.ForeignKey(
+        to='owner_app.Owner_mod',
+        verbose_name='Owner',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=False,
+    )
 
+    image = models.ForeignKey(
+        to=Images_mod,
+        on_delete=models.CASCADE
+    )
+
+
+
+    # Todo , continuar con los campos locatiion, city,
 
 
 
