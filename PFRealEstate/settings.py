@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My apps
+    'PFRealEstate.core_app',
+    'PFRealEstate.property_app',
+    'PFRealEstate.user_agent_app',
+
 ]
 
 MIDDLEWARE = [
