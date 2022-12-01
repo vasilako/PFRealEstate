@@ -1,4 +1,5 @@
 # Modifiqued by Basilio
+PFRealEstate/__pycache__/
 PFRealEstate/core_app/migrations/__pycache__/
 PFRealEstate/owner_app/__pycache__/
 PFRealEstate/owner_app/migrations/__pycache__/
