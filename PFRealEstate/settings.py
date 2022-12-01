@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'PFRealEstate.core_app',
     'PFRealEstate.property_app',
     'PFRealEstate.user_agent_app',
+    'PFRealEstate.owner_app',
 
 ]
 
