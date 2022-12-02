@@ -2,9 +2,44 @@ from django.db import models
 
 class Images_mod(models.Model):
     filename = models.ImageField(
-        upload_to=None,
+        upload_to='photos',
         width_field=300,
 
+    )
+
+    def __str__(self):
+        return self.filename
+
+class Location(models.Model):
+    name = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    name = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+        unique=True,
+    )
+
+class Address(models.Model):
+    location = models.ForeignKey(
+        to=Location,
+        on_delete= models.SET_NULL,
+        null=True,
+    )
+
+    city = models.ForeignKey(
+        to=City,
+        on_delete=models.SET_NULL,
+        null=True,
     )
 
 
@@ -67,9 +102,31 @@ class Property_mod(models.Model):
         on_delete=models.CASCADE
     )
 
+    location = models.ForeignKey(
+        to=Location,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name='Location'
+    )
+
+    # Ojo con esto hay que probar si dará error por to_field =
+    city = models.ForeignKey(
+        to=City,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name = 'City'
+    )
+
+    street_and_number = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name='Street and number'
+    )
 
 
-    # Todo , continuar con los campos locatiion, city,
+    def __str__(self):
+        return f'{self.type} - {self.price} - {self.city} - {self.owner.name} - {self.operation}'
+
 
 
 
