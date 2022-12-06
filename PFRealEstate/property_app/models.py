@@ -12,7 +12,7 @@ class Images_mod(models.Model):
         return self.filename
 
 
-class Location(models.Model):
+class Location_mod(models.Model):
     name = models.CharField(
         max_length=15,
         null=True,
@@ -24,7 +24,7 @@ class Location(models.Model):
         return self.name
 
 
-class City(models.Model):
+class City_mod(models.Model):
     name = models.CharField(
         max_length=15,
         null=True,
@@ -33,15 +33,15 @@ class City(models.Model):
     )
 
 
-class Address(models.Model):
+class Address_mod(models.Model):
     location = models.ForeignKey(
-        to=Location,
+        to=Location_mod,
         on_delete= models.SET_NULL,
         null=True,
     )
 
     city = models.ForeignKey(
-        to=City,
+        to=City_mod,
         on_delete=models.SET_NULL,
         null=True,
     )
@@ -121,14 +121,14 @@ class Property_mod(models.Model):
     )
 
     location = models.ForeignKey(
-        to=Location,
+        to=Location_mod,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name='Location'
     )
 
     city = models.ForeignKey(
-        to=City,
+        to=City_mod,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name = 'City'

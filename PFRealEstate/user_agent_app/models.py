@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 
 from django.db import models
-from PFRealEstate.property_app.models import Property_mod
 
 
 # Create your models here.
@@ -22,7 +21,13 @@ class UserAgent_mod(models.Model):
 
 
     manage_properties = models.ForeignKey(
-        Property_mod,
+        to='property_app.Property_mod',
         on_delete=models.SET_NULL,
         null=True,
     )
+
+    @property
+    def number_of_properties(self):
+        all_propertis = self.manage_properties
+        return len(all_propertis)
+
