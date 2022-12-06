@@ -5,8 +5,8 @@ from PFRealEstate.property_app.models import Property_mod, Location_mod, City_mo
 from PFRealEstate.user_agent_app.models import UserAgent_mod
 
 
-class OwnerInLine(admin.TabularInline):
-    model = Owner_mod
+class ImageInLine(admin.TabularInline):
+    model = Images_mod
     extra = 1
 
 
@@ -42,6 +42,9 @@ class Property_modAdmin(admin.ModelAdmin):
         'title',
     )
 
+    inlines = (
+        ImageInLine,
+    )
 
 
 @admin.register(Location_mod)
