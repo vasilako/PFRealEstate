@@ -15,19 +15,22 @@ class Owner_mod(models.Model):
         blank=False,
     )
 
-    phone_number = models.PositiveIntegerField(
+    phone_number = models.CharField(
         verbose_name= 'Owner phone',
+        max_length=9,
         null=False,
         blank=False
 
     )
 
-    owner_properties = models.ForeignKey(
+    owner_properties = models.ManyToManyField(
         to='property_app.Property_mod',
-        on_delete=models.CASCADE,
         # De este modo se evita el Impot del modelo porque ya es un string
         related_name='owner_properties',
         blank=True,
         verbose_name = 'Owner Properties',
     )
-
+class Meta:
+    verbose_name='Owner',
+    verbose_name_plural ='Owners',
+    ordering = ['first_name', 'last_name']

@@ -20,14 +20,13 @@ class UserAgent_mod(models.Model):
     )
 
 
-    manage_properties = models.ForeignKey(
+    manage_properties = models.ManyToManyField(
         to='property_app.Property_mod',
-        on_delete=models.SET_NULL,
-        null=True,
+        related_name='manage_properties'
     )
 
     @property
     def number_of_properties(self):
-        all_propertis = self.manage_properties
+        all_propertis = self.manage_properties.objects.all()
         return len(all_propertis)
 

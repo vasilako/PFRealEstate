@@ -10,7 +10,7 @@ from PFRealEstate.user_agent_app.models import UserAgent_mod
 # Register your models here.
 class PropertiesInLine(admin.TabularInline):
     model = Property_mod
-    extra = 3
+    extra = 1
 
 
 @admin.register(UserAgent_mod)
