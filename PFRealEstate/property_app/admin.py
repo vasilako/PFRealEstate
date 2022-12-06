@@ -19,9 +19,8 @@ class Property_modAdmin(admin.ModelAdmin):
         'state',
         'price',
         'address',
-        'owner'
-        'created_by',
-
+        'owner',
+        'user_agent'
 
     )
 
@@ -30,6 +29,10 @@ class Property_modAdmin(admin.ModelAdmin):
         'operation',
         'state',
         'price',
+        'owner',
+        'created_date',
+
+
     )
 
     list_filter = (

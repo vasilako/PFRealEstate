@@ -30,6 +30,12 @@ class Owner_mod(models.Model):
         blank=True,
         verbose_name = 'Owner Properties',
     )
+
+    @property
+    def ful_name(self):
+        return f'{self.first_name} {self.last_name}'
+    def __str__(self):
+        return self.ful_name
 class Meta:
     verbose_name='Owner',
     verbose_name_plural ='Owners',

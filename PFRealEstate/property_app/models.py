@@ -10,30 +10,31 @@ class Location_mod(models.Model):
         unique=True,
     )
 
+
 class City_mod(models.Model):
-    name = models.CharField(
-        max_length=15,
-        null=True,
-        blank=True,
-        unique=True,
-    )
+
     city_location = models.ForeignKey(
         to=Location_mod,
         on_delete=models.SET_NULL,
         null=True
     )
 
+    name = models.CharField(
+        max_length=15,
+        null=True,
+        blank=True,
+        unique=True,
+    )
+
     def __str__(self):
         return self.name
-
-
 
 
 class Address_mod(models.Model):
 
     location = models.ForeignKey(
         to=Location_mod,
-        on_delete= models.SET_NULL,
+        on_delete=models.SET_NULL,
         null=True,
     )
 
@@ -70,7 +71,7 @@ class Property_mod(models.Model):
 
     operation = models.CharField(
         verbose_name='Operation Type',
-        max_length=4, choices= PROPERTY_OPERATION,
+        max_length=4, choices=PROPERTY_OPERATION,
         null=False,
         blank=False,
     )
@@ -82,23 +83,17 @@ class Property_mod(models.Model):
         blank=False,
     )
 
-    slug = models.SlugField(
-        max_length=200,
-        editable=False,
-
-    )
-
     type = models.CharField(
         verbose_name='Property Type',
         max_length=7,
-        choices= PROPERTY_TYPES,
+        choices=PROPERTY_TYPES,
         null=False,
         blank=False,
     )
 
     state = models.CharField(
         verbose_name='Property state',
-        max_length=4, choices= PROPERTY_STATE,
+        max_length=4, choices=PROPERTY_STATE,
         null=False,
         blank=False,
     )
@@ -116,15 +111,16 @@ class Property_mod(models.Model):
         blank=False,
         null=False
     )
-    created_by = models.ForeignKey(
-        to='user_agent_app.UserAgent_mod',
-        on_delete=models.SET_NULL,
+
+    owner = models.ForeignKey(
+        to='owner_app.Owner_mod',
+        on_delete=models.CASCADE,
         null=True,
         blank=False
     )
 
-    owner = models.ForeignKey(
-        to='owner_app.Owner_mod',
+    user_agent = models.ForeignKey(
+        to='user_agent_app.UserAgent_mod',
         on_delete=models.CASCADE,
         null=True,
         blank=False
@@ -137,16 +133,23 @@ class Property_mod(models.Model):
         auto_now=True,
     )
 
+    slug = models.SlugField(
+        max_length=200,
+        editable=False,
+
+    )
+
+    def __str__(self):
+        return self.title
+
 def save(self, *args, **kwargs):
     self.url = slugify(self.title)
     super(Property_mod).save(*args, **kwargs)
 
 
 class Meta:
-    verbose_name='Property'
+    verbose_name = 'Property'
     verbose_name_plural = 'Properties'
-
-
 
 
 class Images_mod(models.Model):
@@ -159,7 +162,6 @@ class Images_mod(models.Model):
         to=Property_mod,
         on_delete=models.CASCADE,
     )
+
     def __str__(self):
         return str(self.filename)
-
-
