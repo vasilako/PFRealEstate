@@ -22,8 +22,9 @@ class Owner_mod(models.Model):
 
     )
 
-    owner_properties = models.ManyToManyField(
+    owner_properties = models.ForeignKey(
         to='property_app.Property_mod',
+        on_delete=models.CASCADE,
         # De este modo se evita el Impot del modelo porque ya es un string
         related_name='owner_properties',
         blank=True,

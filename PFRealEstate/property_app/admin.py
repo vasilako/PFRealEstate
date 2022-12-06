@@ -6,6 +6,7 @@ from PFRealEstate.property_app.models import Property_mod, Location_mod, City_mo
 
 class OwnerInLine(admin.TabularInline):
     model = Owner_mod
+    extra = 3
 
 
 @admin.register(Property_mod)
@@ -23,11 +24,11 @@ class Property_modAdmin(admin.ModelAdmin):
         'type',
         'price',
         'location',
-        'City',
+        # 'City',
         'title',
-        'created_bay'
-        'created_date',
-        'modified_date'
+        # 'created_bay'
+        # 'created_date',
+        # 'modified_date'
     )
 
     inlines = (
@@ -37,27 +38,28 @@ class Property_modAdmin(admin.ModelAdmin):
 
 @admin.register(Location_mod)
 class Location_modAdmin(admin.ModelAdmin):
+
     ordering = (
-        'name'
+        'name',
     )
 
     list_display = (
-        'name'
+        'name',
     )
 
 @admin.register(City_mod)
 class City_modAdmin(admin.ModelAdmin):
     ordering = (
-        'name'
+        'name',
     )
 
     list_display = (
-        'name'
+        'name',
     )
 
 @admin.register(Address_mod)
 class Address_modAdmin(admin.ModelAdmin):
     list_display = (
         'location',
-        'city'
+        'city',
     )
