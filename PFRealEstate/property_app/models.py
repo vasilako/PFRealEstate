@@ -1,14 +1,16 @@
 from django.db import models
+from django.utils.text import slugify
+from PFRealEstate.user_agent_app.models import UserAgent_mod
+
 
 class Images_mod(models.Model):
     filename = models.ImageField(
-        upload_to='photos',
-        width_field=300,
-
+        upload_to='photos_properties',
     )
 
     def __str__(self):
         return self.filename
+
 
 class Location(models.Model):
     name = models.CharField(
@@ -21,6 +23,7 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
+
 class City(models.Model):
     name = models.CharField(
         max_length=15,
@@ -28,6 +31,7 @@ class City(models.Model):
         blank=True,
         unique=True,
     )
+
 
 class Address(models.Model):
     location = models.ForeignKey(
@@ -62,9 +66,23 @@ class Property_mod(models.Model):
         ('used', 'Used'),
     ]
 
+    title = models.CharField(
+        verbose_name='Property Title',
+        max_length=200,
+        null=False,
+        blank=False,
+    )
+
+    slug = models.SlugField(
+        max_length=200,
+        editable=False,
+
+    )
+
     type = models.CharField(
         verbose_name='Property Type',
-        max_length=7, choices= PROPERTY_TYPES,
+        max_length=7,
+        choices= PROPERTY_TYPES,
         null=False,
         blank=False,
     )
@@ -109,7 +127,6 @@ class Property_mod(models.Model):
         verbose_name='Location'
     )
 
-    # Ojo con esto hay que probar si dará error por to_field =
     city = models.ForeignKey(
         to=City,
         on_delete=models.SET_NULL,
@@ -123,9 +140,23 @@ class Property_mod(models.Model):
         verbose_name='Street and number'
     )
 
+    created_by = models.ForeignKey(
+        UserAgent_mod,
+        on_delete=models.CASCADE
+    )
 
+    created_date = models.DateTimeField(
+        auto_now_add=True,
+    )
+    modified_date = models.DateTimeField(
+        auto_now=True,
+    )
     def __str__(self):
         return f'{self.type} - {self.price} - {self.city} - {self.owner.name} - {self.operation}'
+
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 

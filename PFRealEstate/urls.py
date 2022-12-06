@@ -19,3 +19,10 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# Aqi se importa static y se configura MEDIA URL Y MEDIA ROOT
+from django.conf.urls.static import static
+from PFRealEstate import settings
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

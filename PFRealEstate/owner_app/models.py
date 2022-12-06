@@ -3,20 +3,26 @@ from django.db import models
 
 # Create your models here.
 class Owner_mod(models.Model):
-    name = models.CharField(
+    first_name = models.CharField(
         max_length=30,
         null=False,
         blank= False,
     )
 
-    phone = models.PositiveIntegerField(
+    last_name = models.CharField(
+        max_length=30,
+        null=False,
+        blank=False,
+    )
+
+    phone_number = models.PositiveIntegerField(
         verbose_name= 'Owner phone',
         null=False,
         blank=False
 
     )
 
-    properties = models.ManyToManyField(
+    owner_properties = models.ManyToManyField(
         to='property_app.Property_mod',
         # De este modo se evita el Impot del modelo porque ya es un string
         related_name='owner_properties',
