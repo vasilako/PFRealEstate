@@ -19,3 +19,5 @@ class UserAgentAdmin(admin.ModelAdmin):
         # 'last_name',
         # 'number_of_properties'
     )
+
+

@@ -10,6 +10,12 @@ class Location_mod(models.Model):
         unique=True,
     )
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Location'
+        verbose_name_plural = 'Locations'
 
 class City_mod(models.Model):
 
@@ -28,6 +34,10 @@ class City_mod(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'
 
 
 class Address_mod(models.Model):
@@ -48,6 +58,12 @@ class Address_mod(models.Model):
         max_length=100,
         blank=True
     )
+
+    def __str__(self):
+        return f'{self.location}, {self.city}, {self.street_and_number}'
+    class Meta:
+        verbose_name = 'Address'
+        verbose_name_plural = 'Addresses'
 
 
 class Property_mod(models.Model):
@@ -142,14 +158,14 @@ class Property_mod(models.Model):
     def __str__(self):
         return self.title
 
-def save(self, *args, **kwargs):
-    self.url = slugify(self.title)
-    super(Property_mod).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
-class Meta:
-    verbose_name = 'Property'
-    verbose_name_plural = 'Properties'
+    class Meta:
+        verbose_name = 'Property'
+        verbose_name_plural = 'Properties'
 
 
 class Images_mod(models.Model):
@@ -165,3 +181,7 @@ class Images_mod(models.Model):
 
     def __str__(self):
         return str(self.filename)
+
+    class Meta:
+        verbose_name = 'Image'
+        verbose_name_plural = 'Images'

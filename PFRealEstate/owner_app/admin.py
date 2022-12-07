@@ -9,10 +9,12 @@ class Owner_modAdmin(admin.ModelAdmin):
     list_display = (
         'first_name',
         'last_name',
-        'phone_number'
+        'phone_number',
+        'id',
     )
 
     list_filter = (
         'first_name',
         'last_name',
+        'id',
     )

@@ -25,14 +25,13 @@ class Property_modAdmin(admin.ModelAdmin):
     )
 
     list_display = (
+        'title',
         'type',
         'operation',
         'state',
         'price',
         'owner',
         'created_date',
-
-
     )
 
     list_filter = (
@@ -71,6 +70,11 @@ class City_modAdmin(admin.ModelAdmin):
 @admin.register(Address_mod)
 class Address_modAdmin(admin.ModelAdmin):
     list_display = (
+        'location',
+        'city',
+        'street_and_number'
+    )
+    list_filter = (
         'location',
         'city',
     )

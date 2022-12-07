@@ -7,6 +7,7 @@ class UserAgent_mod(models.Model):
     user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
+
     )
     phone_number = models.CharField(
         max_length=9,
@@ -16,6 +17,15 @@ class UserAgent_mod(models.Model):
     profile_image = models.ImageField(
         upload_to='photos_user_agent',
     )
+
+    def __str__(self):
+        make_name = str(self.user)
+        return make_name
+
+    class Meta:
+        verbose_name='Agent'
+        verbose_name_plural = 'Agents'
+
 
     # manage_properties = models.ManyToManyField(
     #     to='property_app.Property_mod',
