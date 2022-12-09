@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # My apps
+    'PFRealEstate.core_app',
+    'PFRealEstate.property_app',
+    'PFRealEstate.user_agent_app',
+    'PFRealEstate.owner_app',
+
 ]
 
 MIDDLEWARE = [
@@ -74,12 +81,25 @@ WSGI_APPLICATION = 'PFRealEstate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# ------------- This DataBase is por develop mode-------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# ------------- This DataBase is por defence mode ----------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'PFRealEstate_DB',
+#         'USER': 'postgres-user',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -122,3 +142,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = (BASE_DIR / 'mediafiles')
+
+
+AUTH_USER_MODEL= 'user_agent_app.UserAgent_mod'
