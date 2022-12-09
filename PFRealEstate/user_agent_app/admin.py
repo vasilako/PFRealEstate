@@ -16,7 +16,6 @@ class UserAgentAdmin(UserAdmin):
         (('User info'), {'fields': ('phone_number', 'profile_image', 'manage_properties')}),
     )
 
-
     list_display = (
         'username',
         'first_name',
@@ -30,5 +29,16 @@ class UserAgentAdmin(UserAdmin):
         'last_name',
     )
 
+    search_fields = (
+        'username',
+        'first_name',
+        'last_name',
+        'phone_number',
+        'email',
+    )
+
+    ordering = (
+        'username',
+    )
 
 

@@ -18,3 +18,9 @@ class Owner_modAdmin(admin.ModelAdmin):
         'last_name',
         'id',
     )
+
+    search_fields = (
+        'first_name',
+        'last_name',
+        'phone_number',
+    )

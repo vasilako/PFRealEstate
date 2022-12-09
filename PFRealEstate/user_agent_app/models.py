@@ -27,8 +27,8 @@ class UserAgent_mod(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
     class Meta:
-        verbose_name='User Agent'
-        verbose_name_plural = 'Users Agents'
+        verbose_name='Admin - Agent -User'
+        verbose_name_plural = 'Admins - Agents- Users'
 
 
 

@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from PFRealEstate.owner_app.models import Owner_mod
 from PFRealEstate.property_app.models import Property_mod, Location_mod, City_mod, Address_mod, Images_mod
-from PFRealEstate.user_agent_app.models import UserAgent_mod
-
 
 class ImageInLine(admin.TabularInline):
     model = Images_mod
@@ -21,7 +18,6 @@ class Property_modAdmin(admin.ModelAdmin):
         'address',
         'owner',
         'user_agent'
-
     )
 
     list_display = (
@@ -37,12 +33,22 @@ class Property_modAdmin(admin.ModelAdmin):
     list_filter = (
         'operation',
         'type',
-        'price',
-        'title',
+        'state',
+        'user_agent',
     )
 
     inlines = (
         ImageInLine,
+    )
+
+    search_fields = (
+        'title',
+        'price',
+    )
+
+    ordering = (
+        '-price',
+        'title'
     )
 
 
@@ -57,6 +63,7 @@ class Location_modAdmin(admin.ModelAdmin):
         'name',
     )
 
+
 @admin.register(City_mod)
 class City_modAdmin(admin.ModelAdmin):
     ordering = (
@@ -66,6 +73,7 @@ class City_modAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
+
 
 @admin.register(Address_mod)
 class Address_modAdmin(admin.ModelAdmin):
@@ -79,9 +87,12 @@ class Address_modAdmin(admin.ModelAdmin):
         'city',
     )
 
+    search_fields = (
+        'street_and_number',
+    )
+
 @admin.register(Images_mod)
 class Image_modAdmin(admin.ModelAdmin):
     list_display = (
         'filename',
-
     )
