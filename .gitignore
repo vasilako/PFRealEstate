@@ -10,3 +10,7 @@ PFRealEstate/owner_app/migrations/__pycache__/
 PFRealEstate/property_app/migrations/__pycache__/
 PFRealEstate/user_agent_app/migrations/__pycache__/
 mediafiles
+
+#Los experimentos
+PFRealEstate/property_app/templates/propeties/propety_create_or_update.html
+PFRealEstate/property_app/formset.py

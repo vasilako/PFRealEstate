@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User details</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<h3>User detatails</h3>
+<ul>
+    <li>{{ user_detail.username | upper}}</li>
+    <li>{{ user_detail.first_name}}</li>
+    <li>{{ user_detail.last_name}}</li>
+    {% if user_detail.profile_image.url != '' %}
+    <img style="width: 150px" src="{{ user_detail.profile_image.url }}" alt="User Profile Image">
+        {% else %}
+        <img style="width: 150px" src="{% static 'images/user_no_photo.png' %}" alt="User no profile image">
+    {% endif %}
+</ul>
+
+<h3>User propeties</h3>
+{% with user_properties as properties %}
+    {% for propety in properties %}
+        <li>Title: {{ propety.title}}, Price: {{ propety.title}}, Created on: {{ propety.created_date}}</li>
+
+    {% endfor %}
+{% endwith %}
+
+
+
+</body>
+</html>

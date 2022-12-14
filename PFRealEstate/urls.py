@@ -14,11 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('core/', include('PFRealEstate.core_app.urls')),
+    path('user/', include('PFRealEstate.user_agent_app.urls')),
+    path('property/', include('PFRealEstate.property_app.urls')),
+    # path('owner/', include('PFRealEstate.owner_app.urls')),
+
+
 ]
+
+
 
 # Aqi se importa static y se configura MEDIA URL Y MEDIA ROOT
 from django.conf.urls.static import static

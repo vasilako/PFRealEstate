@@ -46,12 +46,14 @@ class Address_mod(models.Model):
         to=Location_mod,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
     )
 
     city = models.ForeignKey(
         to=City_mod,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
     )
 
     street_and_number = models.CharField(
@@ -67,12 +69,18 @@ class Address_mod(models.Model):
 
 
 class Property_mod(models.Model):
+    FLAT = 'flat'
+    AREA = 'area'
+    CHALET = 'chalet'
+    SHOP = 'shop'
+    OFFICES = 'offices'
+
     PROPERTY_TYPES = [
-        ('flat', 'Flat'),
-        ('area', 'Area'),
-        ('chalet', 'Chalet'),
-        ('shop', 'Comercial'),
-        ('offices', 'Offices'),
+        (FLAT, 'Flat'),
+        (AREA, 'Area'),
+        (CHALET, 'Chalet'),
+        (SHOP, 'Comercial'),
+        (OFFICES, 'Offices'),
     ]
 
     PROPERTY_OPERATION = [
@@ -87,7 +95,8 @@ class Property_mod(models.Model):
 
     operation = models.CharField(
         verbose_name='Operation Type',
-        max_length=4, choices=PROPERTY_OPERATION,
+        max_length=4,
+        choices=PROPERTY_OPERATION,
         null=False,
         blank=False,
     )
@@ -124,8 +133,8 @@ class Property_mod(models.Model):
         to=Address_mod,
         on_delete=models.CASCADE,
         verbose_name='Address Property',
-        blank=False,
-        null=False
+        blank=True,
+        null=True
     )
 
     owner = models.ForeignKey(
@@ -152,14 +161,15 @@ class Property_mod(models.Model):
     slug = models.SlugField(
         max_length=200,
         editable=False,
-
+        # blank=True
     )
 
+
     def __str__(self):
-        return self.title
+        return f'{self.title}, Type: {self.type}, Price: {self.price} €'
 
     def save(self, *args, **kwargs):
-        self.url = slugify(self.title)
+        self.slug = slugify(f'id-{self.id}-{self.title}')
         super().save(*args, **kwargs)
 
 

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create property</title>
+</head>
+<body>
+<div>
+{% include 'nav.html' %}
+
+<form method="post" action="{% url 'create property'%}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for f in form %}
+        <div>{{ f.label }}<br></div>
+        {% if f.errors %}
+            <div>{{ f.errors }}<br></div>
+        {% endif %}
+        <div>{{ f }}<br></div>
+    {% endfor %}
+
+    <h2>Images</h2>
+
+   {{ formset.management_form }}
+    {% for form in formset %}
+        {% for field in form %}
+            <div> {{ field }}</div>
+        {% endfor %}
+    {% endfor %}
+    <button>Next step</button>
+</form>
+    </div>
+</body>
+</html>

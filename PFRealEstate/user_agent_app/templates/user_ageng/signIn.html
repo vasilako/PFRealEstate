@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User signIn</title>
 </head>
 <body>
+{% include 'nav.html' %}
+
+<form method="post", action="{% url 'sign in' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button>LogIn</button>
+</form>
 
 </body>
 </html>

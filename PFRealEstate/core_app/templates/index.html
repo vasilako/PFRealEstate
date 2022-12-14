@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div>{{ user }} - pk: {{ request.user.pk }}</div>
+
+
+<div>{% include 'nav.html' %}</div>
+
+{% for property in properties %}
+<div style="display: flex" >
+    <ul>
+        <li>{{ property.operation }}</li>
+        <li>{{ property.type }}</li>
+        <li>{{ property.state }}</li>
+        <li>{{ property.title }}</li>
+        <li>{{ property.price }}</li>
+        <li>{{ property.address }}</li>
+        <li>{{ property.created_date }}</li>
+        <li>{{ property.modified_date }}</li>
+        <li>{{ property.slug }}</li>
+        {% for image in images %}
+            {% if image.to_property_id == property.pk %}
+                <li>
+                <img style="width: 200px" src="{{ image.filename.url }}">
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+</body>
+</html>
