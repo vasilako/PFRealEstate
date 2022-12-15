@@ -25,7 +25,8 @@
 <h3>Images of property</h3>
 
 {%  for image in images %}
-     <img style="width: 200px" src="{{ image.filename.url }}">
+     <img style="width: 200px" src="{{ image.filename.url }}" alt="{{ image.filename }}">
+{#    <img style="width: 200px" src="{{ image.filename }}" alt="{{ image.filename }}">#}
 {% endfor %}
 <div>
     <a href="{% url 'update property' property_detail.slug %}">Edit Property</a>

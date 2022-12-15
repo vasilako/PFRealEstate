@@ -29,7 +29,8 @@
         {% for image in images %}
             {% if image.to_property_id == property.pk %}
                 <li>
-                <img style="width: 200px" src="{{ image.filename.url }}">
+                <img style="width: 200px" src="{{ image.filename.url }}" alt="{{ image.filename }}">
+{#                <img style="width: 200px" src="{{ image.filename }}" alt="{{ image.filename }}">#}
                 </li>
             {% endif %}
         {% endfor %}

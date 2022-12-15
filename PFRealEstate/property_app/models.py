@@ -146,7 +146,7 @@ class Property_mod(models.Model):
 
     user_agent = models.ForeignKey(
         to='user_agent_app.UserAgent_mod',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=False
     )
@@ -161,16 +161,17 @@ class Property_mod(models.Model):
     slug = models.SlugField(
         max_length=200,
         editable=False,
-        # blank=True
+
     )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'id-{self.id}-{self.title}')
+        super().save(*args, **kwargs)
 
 
     def __str__(self):
         return f'{self.title}, Type: {self.type}, Price: {self.price} €'
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(f'id-{self.id}-{self.title}')
-        super().save(*args, **kwargs)
 
 
     class Meta:

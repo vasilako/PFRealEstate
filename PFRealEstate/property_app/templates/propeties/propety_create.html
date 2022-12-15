@@ -11,7 +11,7 @@
 <div>
 {% include 'nav.html' %}
 
-<form method="post" action="{% url 'create property'%}" enctype="multipart/form-data">
+<form method="post" action="{% url 'create property' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     {% for f in form %}

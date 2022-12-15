@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
-
 from django.forms import inlineformset_factory
 from django.http import request
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views import generic as generic_views
 from PFRealEstate.property_app.forms import PropertyCreateOrUpdateForm
@@ -24,14 +24,13 @@ class NewPropertyCreateView(generic_views.CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            self.object = form.save(commit=True)
+            self.object = form.save(commit=False)
+            self.object.user_agent =self.request.user
+            self.object =form.save(commit=True)
             self.object.slug = slugify(f'id-{self.object.id}-{self.object.title}')
             self.object = form.save(commit=True)
-        else:
-            print(form.errors)
 
         current_property = Property_mod.objects.get(id=self.object.pk)
-        print(current_property)
         formset = self.ImageInlineFormset(self.request.POST or None,
                                           self.request.FILES or None,
                                           instance=current_property)
@@ -67,19 +66,40 @@ class PropertyDetailView(generic_views.DetailView):
         return context_object_name
 
 
-class PropertyUpdateView(generic_views.UpdateView):
-    template_name = 'propeties/propety_update.html'
-    model = Property_mod
-    context_object_name = 'property_details'
-
-
 class PropertyDeletelView(generic_views.DeleteView):
     model = Property_mod
     template_name = 'propeties/delete_property.html'
     success_url = '/property/list-properties/'
 
 
+class PropertyUpdateView(generic_views.UpdateView):
+    template_name = 'propeties/propety_update.html'
+    model = Property_mod
+    form_class = PropertyCreateOrUpdateForm
 
+    ImageInlineFormset = inlineformset_factory(
+        parent_model=Property_mod,
+        model=Images_mod,
+        fields=('filename',),
+        can_delete=False,
+    )
 
+    def get_context_data(self, **kwargs):
+        ctx = super(PropertyUpdateView, self).get_context_data(**kwargs)
+        ctx['formset'] = self.ImageInlineFormset(self.request.POST or None,
+                                                 self.request.FILES or None,
+                                                 instance=self.object)
+        return ctx
 
+    def form_valid(self, form):
+        if form.is_valid():
+            self.object = form.save(commit=False)
 
+        formset = self.ImageInlineFormset(self.request.POST or None,
+                                          self.request.FILES or None,
+                                              instance=self.object)
+        current_property = Property_mod.objects.get(id=self.object.pk)
+        if formset.is_valid():
+            self.object = formset.save()
+
+        return redirect('detail property', current_property.slug)

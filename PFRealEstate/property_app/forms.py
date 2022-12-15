@@ -1,17 +1,16 @@
 from django import forms
+from django.forms import inlineformset_factory
 
 from PFRealEstate.property_app.models import Property_mod, Images_mod
 
 
 class PropertyCreateOrUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Property_mod
-        fields = '__all__'
+        exclude = ('user_agent',)
 
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Enter title of the property'}),
-            'price': forms.TextInput(attrs={'placeholder': 'Enter price of the property'}),
         }
 
 

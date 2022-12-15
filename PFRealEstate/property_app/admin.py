@@ -54,6 +54,8 @@ class Property_modAdmin(admin.ModelAdmin):
     autocomplete_fields = ['owner', 'user_agent', 'address']
 
 
+
+
 @admin.register(Location_mod)
 class Location_modAdmin(admin.ModelAdmin):
 
