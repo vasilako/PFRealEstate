@@ -27,12 +27,15 @@
 {{ formset.management_form }}
     {% for form in formset %}
         {% for field in form %}
-            <div> {{ field }}</div>
+            <div>
+                {% if field.label == "Delete" %}{{ field.label }}{% endif %}
+                {{ field }}
+            </div>
         {% endfor %}
     {% endfor %}
 
 
-    <button>Next step</button>
+    <button>Update</button>
 </form>
     </div>
 </body>

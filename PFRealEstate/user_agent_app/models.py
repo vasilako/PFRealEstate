@@ -16,12 +16,12 @@ class UserAgent_mod(AbstractUser):
         upload_to='photos_user_agent',
     )
 
-    # manage_properties = models.ManyToManyField(
-    #     to='property_app.Property_mod',
-    #     related_name='manage_properties',
-    #     blank=True
-    #
-    # )
+    manage_properties = models.ManyToManyField(
+        to='property_app.Property_mod',
+        related_name='manage_properties',
+        blank=True
+
+    )
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

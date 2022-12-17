@@ -18,7 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('core/', include('PFRealEstate.core_app.urls')),
+    path('', include('PFRealEstate.core_app.urls')),
     path('user/', include('PFRealEstate.user_agent_app.urls')),
     path('property/', include('PFRealEstate.property_app.urls')),
     # path('owner/', include('PFRealEstate.owner_app.urls')),

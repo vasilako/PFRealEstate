@@ -14,10 +14,28 @@ User id:{{ request.user.id }}
 
 <!--The tag "page_obj" contains all objects of the model-->
 {% for property in page_obj %}
-    <li>{{ property }}, Slug: {{ property.slug }}
+    <li>
+    <!-- Aqui se rendereizan las imagenes-->
+    {% for image in images %}
+        {% if image.to_property_id == property.pk %}
+           {% if image.filename %}
+        <img style="width: 200px" src="{{ image.filename.url }}" alt="{{ image.filename }}">
+    {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    <br>
+    <!-- Fin images-->
+    <!-- Start property data-->
+        {{ property }}, Slug: {{ property.slug }}<br>
+    <!-- Fin property data-->
+
+    <!-- Start link to edid and deletes property-->
         <a href="{% url 'detail property' property.slug %}">Details Property</a>
         <a href="{% url 'delete property' property.slug %}">Delete Property</a>
+    <!-- Fin links -->
     </li>
+    <br>
     ...
 {% endfor %}
 

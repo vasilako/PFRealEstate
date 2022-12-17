@@ -165,8 +165,10 @@ class Property_mod(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'id-{self.id}-{self.title}')
+        if not self.slug:
+            self.slug = slugify(f'id-{self.id}-{self.title}')
         super().save(*args, **kwargs)
+
 
 
     def __str__(self):

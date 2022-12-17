@@ -19,7 +19,7 @@ class NewPropertyCreateView(generic_views.CreateView):
     parent_model= Property_mod,
     model= Images_mod,
     fields=('filename',),
-    can_delete=False,
+    can_delete=True,
     )
 
     def form_valid(self, form):
@@ -54,6 +54,13 @@ class PropertyListlView(generic_views.ListView):
     context_object_name = 'property_list'
     paginate_by = 6
 
+    def get_context_data(self, **kwargs):
+        context_object_name = super(PropertyListlView, self).get_context_data(**kwargs)
+        context_object_name['images'] = Images_mod.objects.all()
+        return context_object_name
+
+
+
 
 class PropertyDetailView(generic_views.DetailView):
     template_name = 'propeties/propety_details.html'
@@ -76,29 +83,34 @@ class PropertyUpdateView(generic_views.UpdateView):
     template_name = 'propeties/propety_update.html'
     model = Property_mod
     form_class = PropertyCreateOrUpdateForm
+    context_object_name = 'property_detail'
+
 
     ImageInlineFormset = inlineformset_factory(
         parent_model=Property_mod,
         model=Images_mod,
         fields=('filename',),
-        can_delete=False,
+        can_delete=True,
+
     )
 
     def get_context_data(self, **kwargs):
         ctx = super(PropertyUpdateView, self).get_context_data(**kwargs)
+        # ctx['old_slug'] = self.object.slug
         ctx['formset'] = self.ImageInlineFormset(self.request.POST or None,
                                                  self.request.FILES or None,
                                                  instance=self.object)
         return ctx
 
     def form_valid(self, form):
+        current_property = Property_mod.objects.get(id=self.object.pk)
+
         if form.is_valid():
-            self.object = form.save(commit=False)
+            self.object = form.save()
 
         formset = self.ImageInlineFormset(self.request.POST or None,
                                           self.request.FILES or None,
                                               instance=self.object)
-        current_property = Property_mod.objects.get(id=self.object.pk)
         if formset.is_valid():
             self.object = formset.save()
 

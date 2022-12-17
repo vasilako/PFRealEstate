@@ -9,6 +9,8 @@
 
 <form method="post", action="{% url 'sign in' %}">
     {% csrf_token %}
+    <!--This hidden input is to redirect to the next page queries -->
+    <input type="hidden" name="next" value="{{ request.GET.next }}" />
     {{ form }}
     <button>LogIn</button>
 </form>

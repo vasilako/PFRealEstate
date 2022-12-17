@@ -22,14 +22,23 @@
     {% endif %}
 </ul>
 
-<h3>User propeties</h3>
+<h3>User managed propeties</h3>
+{# Use tag with for incorporate local variable (cache), for queries expensive #}
 {% with user_properties as properties %}
-    {% for propety in properties %}
-        <li>Title: {{ propety.title}}, Price: {{ propety.title}}, Created on: {{ propety.created_date}}</li>
-
+    {# Render all user properties #}
+    {% for property in properties %}
+        <li>
+            <a href="{% url 'detail property' property.slug %}">
+            Title: {{ property.title}}, Price: {{ property.title}}, Created on: {{ property.created_date}}
+            </a>
+        </li>
     {% endfor %}
 {% endwith %}
 
+<div>
+    <a href="{% url 'user edit' user_detail.pk %}">Edit User</a>
+    <a href="{% url 'user delete' user_detail.pk %}">Delete User</a>
+</div>
 
 
 </body>
