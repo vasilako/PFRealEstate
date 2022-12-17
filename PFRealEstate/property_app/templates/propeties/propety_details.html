@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="EN-en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Details Property</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<h3>Details of property</h3>
+<div>Operation: {{ object.operation }}</div>
+<div>Title: {{ object.title }}</div>
+<div>Type: {{ object.type }}</div>
+<div>State: {{ object.state }}</div>
+<div>Price: {{ object.price }}</div>
+<div>Address: {{ object.address }}</div>
+<div>Owner name: {{ object.owner }}</div>
+<div>Agent Name: {{ object.user_agent }}</div>
+<div>Date Created: {{ object.created_date }}</div>
+<div>Date Modifiquet:{{ object.modified_date }}</div>
+<div>Slug: {{ object.slug }}</div>
+
+<h3>Images of property</h3>
+
+{%  for image in images %}
+    {% if image.filename %}
+        <img style="width: 200px" src="{{ image.filename.url }}" alt="{{ image.filename }}">
+    {% endif %}
+{% endfor %}
+<div>
+    <a href="{% url 'update property' object.slug %}">Edit Property</a>
+    <a href="{% url 'delete property' object.slug %}">Delete Property</a>
+</div>
+
+
+</body>
+</html>

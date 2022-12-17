@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User signIn</title>
 </head>
 <body>
+{% include 'nav.html' %}
+
+<form method="post", action="{% url 'sign in' %}">
+    {% csrf_token %}
+    <!--This hidden input is to redirect to the next page queries -->
+    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+    {{ form }}
+    <button>LogIn</button>
+</form>
 
 </body>
 </html>

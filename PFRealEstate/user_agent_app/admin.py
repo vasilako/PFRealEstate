@@ -7,6 +7,9 @@ UserModel = get_user_model()
 
 @admin.register(UserModel)
 class UserAgentAdmin(UserAdmin):
+    '''
+    fieldsets() is for organizate all fields ot the models in custom mode.
+    '''
     fieldsets = (
         (None, {'fields': ('username', 'password',)}),
         (('Personal info'), {'fields': ('first_name', 'last_name','email')}),

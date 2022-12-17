@@ -1,0 +1,36 @@
+<style>
+ul.menu li{
+        display: inline;
+        padding: 5px;
+    }
+</style>
+<div>
+    <a href="{% url 'index page' %}">Index Home</a>
+    <ul class="menu">
+
+        <li>User</li>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'sign out' %}">Log Out</a></li>
+                <li><a href="{% url 'user details' request.user.pk %}">Details User</a></li>
+
+
+            {% else %}
+                <li><a href="{% url 'sign up' %}">SignUp</a></li>
+                <li><a href="{% url 'sign in' %}">Log In</a></li>
+
+            {% endif %}
+
+{#            <li><a href="{% url 'user edit' %}">Edit User</a></li>#}
+{#            <li><a href="{% url 'user delete' %}">Delete User</a></li>#}
+        </ul>
+
+        <li>Property</li>
+        <ul>
+            <li><a href="{% url 'create property' %}">Create Property</a></li>
+            <li><a href="{% url 'list property' %}">ListProperty</a></li>
+
+
+        </ul>
+    </ul>
+</div>

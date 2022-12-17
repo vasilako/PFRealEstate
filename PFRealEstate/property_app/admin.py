@@ -17,7 +17,7 @@ class Property_modAdmin(admin.ModelAdmin):
         'price',
         'address',
         'owner',
-        'user_agent'
+        'user_agent',
     )
 
     list_display = (
@@ -51,6 +51,10 @@ class Property_modAdmin(admin.ModelAdmin):
         'title'
     )
 
+    autocomplete_fields = ['owner', 'user_agent', 'address']
+
+
+
 
 @admin.register(Location_mod)
 class Location_modAdmin(admin.ModelAdmin):
@@ -60,6 +64,10 @@ class Location_modAdmin(admin.ModelAdmin):
     )
 
     list_display = (
+        'name',
+    )
+
+    search_fields = (
         'name',
     )
 
@@ -73,7 +81,8 @@ class City_modAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )
-
+    # Incorpora el campo de busqueda por Location en el modelo de City_mod
+    autocomplete_fields = ['city_location']
 
 @admin.register(Address_mod)
 class Address_modAdmin(admin.ModelAdmin):

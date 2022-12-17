@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User details</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<h3>User detatails</h3>
+<ul>
+    <li>{{ user_detail.username | upper}}</li>
+    <li>{{ user_detail.first_name}}</li>
+    <li>{{ user_detail.last_name}}</li>
+    {% if user_detail.profile_image.url != '' %}
+    <img style="width: 150px" src="{{ user_detail.profile_image.url }}" alt="User Profile Image">
+        {% else %}
+        <img style="width: 150px" src="{% static 'images/user_no_photo.png' %}" alt="User no profile image">
+    {% endif %}
+</ul>
+
+<h3>User managed propeties</h3>
+{# Use tag with for incorporate local variable (cache), for queries expensive #}
+{% with user_properties as properties %}
+    {# Render all user properties #}
+    {% for property in properties %}
+        <li>
+            <a href="{% url 'detail property' property.slug %}">
+            Title: {{ property.title}}, Price: {{ property.title}}, Created on: {{ property.created_date}}
+            </a>
+        </li>
+    {% endfor %}
+{% endwith %}
+
+<div>
+    <a href="{% url 'user edit' user_detail.pk %}">Edit User</a>
+    <a href="{% url 'user delete' user_detail.pk %}">Delete User</a>
+</div>
+
+
+</body>
+</html>

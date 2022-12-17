@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Property list</title>
+</head>
+<body>
+{% include 'nav.html' %}
+
+User id:{{ request.user.id }}
+
+<!--The tag "page_obj" contains all objects of the model-->
+{% for property in page_obj %}
+    <li>
+    <!-- Aqui se rendereizan las imagenes-->
+    {% for image in images %}
+        {% if image.to_property_id == property.pk %}
+           {% if image.filename %}
+        <img style="width: 200px" src="{{ image.filename.url }}" alt="{{ image.filename }}">
+    {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    <br>
+    <!-- Fin images-->
+    <!-- Start property data-->
+        {{ property }}, Slug: {{ property.slug }}<br>
+    <!-- Fin property data-->
+
+    <!-- Start link to edid and deletes property-->
+        <a href="{% url 'detail property' property.slug %}">Details Property</a>
+        <a href="{% url 'delete property' property.slug %}">Delete Property</a>
+    <!-- Fin links -->
+    </li>
+    <br>
+    ...
+{% endfor %}
+
+
+<!-- Here begins the code for paginator -->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+<!-- Fin code paginator -->
+
+
+
+
+
+</body>
+</html>
