@@ -1,42 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create property</title>
-</head>
-<body>
-<div>
-{% include 'nav.html' %}
 
-<form method="post"  action="{% url 'update property' slug=object.slug %}" enctype="multipart/form-data" >
-    {% csrf_token %}
+{% include 'base.html' %}
 
-    {% for f in form %}
-        <div>{{ f.label }}<br></div>
-        {% if f.errors %}
-            <div>{{ f.errors }}<br></div>
-        {% endif %}
-        <div>{{ f }}<br></div>
-    {% endfor %}
+{% block content %}
+<div class="register-area" style="background-color: rgb(249, 249, 249);">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="box-for overflow">
 
-    <h2>Images</h2>
+                <div class="col-md-12 col-xs-12">
+                    <h2>Update property : </h2>
+                    <form method="post"  action="{% url 'update property' slug=object.slug %}" enctype="multipart/form-data" >
+                        {% csrf_token %}
 
-{{ formset.management_form }}
-    {% for form in formset %}
-        {% for field in form %}
-            <div>
-                {% if field.label == "Delete" %}{{ field.label }}{% endif %}
-                {{ field }}
+                        {% for f in form %}
+                            <div>{{ f.label }}<br></div>
+                            {% if f.errors %}
+                                <div>{{ f.errors }}<br></div>
+                            {% endif %}
+                            <div>{{ f }}<br></div>
+                        {% endfor %}
+
+                        <h2>Images</h2>
+
+                    {{ formset.management_form }}
+                        {% for form in formset %}
+                            {% for field in form %}
+                                <div>
+                                    {% if field.label == "Delete" %}{{ field.label }}{% endif %}
+                                    {{ field }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+
+                        <button>Update</button>
+                    </form>
+                </div>
             </div>
-        {% endfor %}
-    {% endfor %}
-
-
-    <button>Update</button>
-</form>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

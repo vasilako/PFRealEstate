@@ -1,11 +1,10 @@
 from django.contrib.auth import views as auth_views, get_user_model, login, authenticate
-from django.http import HttpRequest
 
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
 from PFRealEstate.property_app.models import Property_mod
-from PFRealEstate.user_agent_app.forms import CustomUserForms
+from PFRealEstate.user_agent_app.forms import CustomUserForms, CustomAuthLoginForm
 
 UserModel = get_user_model()
 
@@ -24,6 +23,7 @@ class SignUpCreateView(generic_views.CreateView):
 
 class SignInView(auth_views.LoginView):
     template_name = 'user_ageng/signIn.html'
+    form_class = CustomAuthLoginForm
 
     def get_context_data(self, **kwargs):
         '''

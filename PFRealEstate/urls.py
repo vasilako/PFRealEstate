@@ -23,9 +23,7 @@ urlpatterns = [
     path('property/', include('PFRealEstate.property_app.urls')),
     # path('owner/', include('PFRealEstate.owner_app.urls')),
 
-
 ]
-
 
 
 # Aqi se importa static y se configura MEDIA URL Y MEDIA ROOT

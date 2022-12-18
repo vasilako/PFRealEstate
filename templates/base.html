@@ -1,10 +1,25 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+
+<!--Aqui se cargan las caveceras con links etc. -->
+{% include 'headers/header.html' %}
+
 <body>
+<!--Aqui estoy incluiendo la navegacion-->
+{% include 'navs/nav.html' %}
+
+<!--Aqui es la zona reservada para el contenido dinamico-->
+{% block content %}
+{% endblock %}
+
+<!--Aqui estoy incluiendo el footer-->
+{#{% include 'footers/footer.html' %}#}
 
 </body>
 </html>

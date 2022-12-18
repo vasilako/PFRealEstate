@@ -1,18 +1,10 @@
-{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!-- Aqui estoy incluiendo la plantilla base que incluie hedar, nav, footer-->
+{% include 'base.html' %}
 
-<body>
+{% block content %}
+    <div>{{ user }} - pk: {{ request.user.pk }}</div>
 
-<div>{{ user }} - pk: {{ request.user.pk }}</div>
-
-
-<div>{% include 'nav.html' %}</div>
 
 {% for property in properties %}
 <div style="display: flex" >
@@ -38,6 +30,4 @@
     </ul>
 </div>
 {% endfor %}
-
-</body>
-</html>
+{% endblock %}
