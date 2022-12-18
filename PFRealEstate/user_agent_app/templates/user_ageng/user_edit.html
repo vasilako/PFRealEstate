@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User edit</title>
-</head>
-<body>
+{% include 'base.html' %}
+{% block content %}
+    <div class="container">
+    <h3 class="h3">
+        At this time this function can only be performed from your admin panel:
+    <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noopener noreferrer">>Admin Panel</a>
+    </h3>
 
-</body>
-</html>
+    </div>
+
+{% endblock %}
