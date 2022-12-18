@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-vn()#_)y099tg-mgc#0^_8ojt*kro_j^pyzzybh^%%!&e@53d#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =[]
 
 
 # Application definition
@@ -85,25 +85,24 @@ WSGI_APPLICATION = 'PFRealEstate.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # ------------- This DataBase is por develop mode-------------
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# ------------- This DataBase is por defence mode ----------------
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'PFRealEstate_DB',
-#         'USER': 'postgres-user',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
+# ------------- This DataBase is por defence mode ----------------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'PFRealEstate_DB',
+        'USER': 'postgres-user',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

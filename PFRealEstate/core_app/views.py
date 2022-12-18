@@ -21,3 +21,7 @@ class indexView(generic_views.TemplateView):
         return context
 
 
+class RegisterView(generic_views.TemplateView):
+    template_name = 'user_ageng/register.html'
+
+

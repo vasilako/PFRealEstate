@@ -1,0 +1,21 @@
+        <!-- Start nav bar -->
+<nav>
+     <div>
+        <ul class="main-nav nav navbar-nav navbar-right">
+           <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'index page' %}">Home</a></li>
+
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'list property' %}">List Properties</a></li>
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'create property' %}">Create Property</a></li>
+
+            {% if user.is_authenticated %}
+                <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="{% url 'user details' request.user.pk %}">Details User</a></li>
+                <li class="nav-button" data-wow-delay="0.1s"><a href="{% url 'sign out' %}">Log Out</a></li>
+            {% else %}
+                <li class="nav-button" data-wow-delay="0.1s"><a href="{% url 'sign up' %}">SignUp</a></li>
+                <li class="nav-button" data-wow-delay="0.1s"><a href="{% url 'sign in' %}">Log In</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+        <!-- End of nav bar -->
